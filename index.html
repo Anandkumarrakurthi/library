@@ -1,0 +1,90 @@
+<!doctype html>
+<html>  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN FORM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>LIBRARY BOOKS</h1>
+    </header>
+
+    <section>
+        <div class="login-container">
+            <form onsubmit="login(event)">
+                <h2>LOGIN</h2>
+
+                <div class="input-group">
+                    <label for="Username">pin no:</label>
+                    <input type="text" id="Username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">password:</label>
+                    <input type="password" id="password" required>
+                </div>
+
+                <div class="input-group">
+                    <button type="submit" value="submit">submit</button>
+                </div>
+                <section style="margin-top:20px;">
+                <div class="sign">
+                    Don't have register..?
+                    <a href="index2.html">   sign up</a> 
+                </div>
+                </section>
+            </form>
+        </div>
+    </section>
+
+    <script>
+    function login(event) {
+        event.preventDefault();
+
+        let username = document.getElementById("Username").value;
+        let password = document.getElementById("password").value;
+
+        // 10 Built-In Accounts
+        const builtInUsers = [
+            { username: "24093-CM-189", password: "6-5-2008" },
+            { username: "24093-CM-142", password: "26-5-2009" },
+            { username: "user3", password: "pass3" },
+            { username: "user4", password: "pass4" },
+            { username: "user5", password: "pass5" },
+            { username: "user6", password: "pass6" },
+            { username: "user7", password: "pass7" },
+            { username: "user8", password: "pass8" },
+            { username: "user9", password: "pass9" },
+            { username: "user10", password: "pass10" }
+        ];
+
+        // Check LocalStorage registered user
+        let storedUser = JSON.parse(localStorage.getItem("user"));
+
+        // First check localStorage account
+        if (storedUser && username === storedUser.username && password === storedUser.password) {
+            alert("Login successful!");
+            window.location.href = "index3.html";
+            return;
+        }
+
+        // Check built-in users
+        let match = builtInUsers.find(u => u.username === username && u.password === password);
+
+        if (match) {
+            alert("Login successful!");
+            window.location.href = "index3.html";
+        } 
+        else {
+            alert("Invalid credentials!");
+        }
+    }
+</script>
+
+<footer>
+<p>&copy; 2025.All rights reserved.</p>
+</footer>
+</body>
+</html>

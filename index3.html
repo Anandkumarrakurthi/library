@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <title>Library</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <header>
+        <h2>LIBRARY BOOKS</h2>
+    </header>
+
+    <h2>HOME</h2>
+    <h3>Semester Text Books</h3>
+
+    <form>
+         <section>
+        <!-- Scheme -->
+        <label>Scheme: </label>
+        <input id="schemeInput" list="list1">
+        <datalist id="list1">
+            <option value="c23">
+            <option value="c20">
+            <option value="c16">
+        </datalist>
+
+        <!-- Department -->
+        <label>Department: </label>
+        <input id="deptInput" list="list2">
+        <datalist id="list2">
+            <option value="DCME">
+            <option value="DECE">
+            <option value="DEEE">
+        </datalist>
+
+        <br><br>
+        <button type="button" onclick="loadPage()">Submit</button>
+    </form>
+</section>
+    <section id="contact" class="hero">
+        <h2>CONTACT</h2>
+        <p>12345467890</p>
+    </section>
+
+<script>
+function loadPage() {
+    let scheme = document.getElementById("schemeInput").value.trim();
+    let dept = document.getElementById("deptInput").value.trim();
+
+    let key = scheme + "-" + dept;
+
+    const pages = {
+        "c23-DCME": "C23CME.html",
+        "c23-DECE": "C23ECE.html",
+        "c23-DEEE": "C23EEE.html",
+
+        "c20-DCME": "cme20.html",
+        "c20-DECE": "ece20.html",
+        "c20-DEEE": "eee20.html",
+
+        "c16-DCME": "cme16.html",
+        "c16-DECE": "ece16.html",
+        "c16-DEEE": "eee16.html",
+    };
+
+    if (pages[key]) {
+        window.location.href = pages[key];
+    } else {
+        alert("Page not available for selected Scheme & Department!");
+    }
+}
+</script>
+
+<footer>
+    <p>&copy; 2025. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
