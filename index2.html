@@ -38,25 +38,37 @@
     </section>
 
     <script>
-        function sign_up(event) {
-            event.preventDefault();
+function sign_up(event) {
+    event.preventDefault();
 
-            let username = document.getElementById("username").value;
-            let name = document.getElementById("name").value;
-            let password = document.getElementById("password").value;
+    let username = document.getElementById("username").value;
+    let name = document.getElementById("name").value;
+    let password = document.getElementById("password").value;
 
-            // Save account in localStorage
-            localStorage.setItem("user", JSON.stringify({ username, password, name }));
+    // Load users list from localStorage
+    let users = JSON.parse(localStorage.getItem("allUsers")) || [];
 
-            alert("Account created successfully!");
+    // Check duplicate
+    if (users.some(u => u.username === username)) {
+        alert("User already exists!");
+        return;
+    }
 
-            // Redirect to login page
-            window.location.href = "index.html";
-        }
-    </script>
+    // Add new user
+    users.push({ username, password, name });
+
+    // Save updated list
+    localStorage.setItem("allUsers", JSON.stringify(users));
+
+    alert("Account created successfully!");
+
+    window.location.href = "index.html";
+}
+</script>
 <footer>
 <p>&copy; 2025.All rights reserved.</p>
 </footer>    
 </body>
 </html>
+
 
