@@ -38,49 +38,44 @@
             </form>
         </div>
     </section>
+<script>
+function login(event) {
+    event.preventDefault();
 
-    <script>
-    function login(event) {
-        event.preventDefault();
+    let username = document.getElementById("Username").value;
+    let password = document.getElementById("password").value;
 
-        let username = document.getElementById("Username").value;
-        let password = document.getElementById("password").value;
+    // Default built-in users
+    const builtInUsers = [
+        { username: "24093-CM-189", password: "6-5-2008" },
+        { username: "24093-CM-142", password: "26-5-2009" },
+        { username: "user3", password: "pass3" },
+        { username: "user4", password: "pass4" },
+        { username: "user5", password: "pass5" },
+        { username: "user6", password: "pass6" },
+        { username: "user7", password: "pass7" },
+        { username: "user8", password: "pass8" },
+        { username: "user9", password: "pass9" },
+        { username: "user10", password: "pass10" }
+    ];
 
-        // 10 Built-In Accounts
-        const builtInUsers = [
-            { username: "24093-CM-189", password: "6-5-2008" },
-            { username: "24093-CM-142", password: "26-5-2009" },
-            { username: "user3", password: "pass3" },
-            { username: "user4", password: "pass4" },
-            { username: "user5", password: "pass5" },
-            { username: "user6", password: "pass6" },
-            { username: "user7", password: "pass7" },
-            { username: "user8", password: "pass8" },
-            { username: "user9", password: "pass9" },
-            { username: "user10", password: "pass10" }
-        ];
+    // Load saved users
+    let savedUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 
-        // Check LocalStorage registered user
-        let storedUser = JSON.parse(localStorage.getItem("user"));
+    // Merge built-in + saved users
+    let allUsers = [...builtInUsers, ...savedUsers];
 
-        // First check localStorage account
-        if (storedUser && username === storedUser.username && password === storedUser.password) {
-            alert("Login successful!");
-            window.location.href = "index3.html";
-            return;
-        }
+    // Find match
+    let matched = allUsers.find(u => u.username === username && u.password === password);
 
-        // Check built-in users
-        let match = builtInUsers.find(u => u.username === username && u.password === password);
-
-        if (match) {
-            alert("Login successful!");
-            window.location.href = "index3.html";
-        } 
-        else {
-            alert("Invalid credentials!");
-        }
+    if (matched) {
+        alert("Login successful!");
+        window.location.href = "index3.html";
+    } else {
+        alert("Invalid credentials!");
+        document.getElementById("password").value = "";
     }
+}
 </script>
 
 <footer>
@@ -88,3 +83,4 @@
 </footer>
 </body>
 </html>
+
